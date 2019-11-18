@@ -3,6 +3,7 @@ extends Sprite
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+onready var global = get_node("/root/global")
 export var velocity = Vector2(0,50)
 
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +22,7 @@ func get_offset():
 	return offset.y * scale.y
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if get_node("/root/global").time_stopped:
+	if global.time_stopped:
 		return
 	translate(velocity * delta)
 	if get_y() >= get_viewport_rect().size.y:
