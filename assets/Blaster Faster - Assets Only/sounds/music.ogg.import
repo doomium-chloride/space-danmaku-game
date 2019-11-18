@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/music.ogg-543e8de54de7007de714c4cad289088b.oggstr"
+
+[deps]
+
+source_file="res://assets/Blaster Faster - Assets Only/sounds/music.ogg"
+dest_files=[ "res://.import/music.ogg-543e8de54de7007de714c4cad289088b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

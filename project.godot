@@ -16,8 +16,17 @@ _global_script_class_icons={
 [application]
 
 config/name="game"
-run/main_scene="res://scenes/player.tscn"
+run/main_scene="res://sauce/player.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+global="*res://sauce/global.gd"
+
+[display]
+
+window/size/width=600
+window/size/height=800
 
 [input]
 

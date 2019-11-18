@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/laser_ship.wav-ff6b78a8b09330c4c47f4bf622afd317.sample"
+
+[deps]
+
+source_file="res://assets/Blaster Faster - Assets Only/sounds/laser_ship.wav"
+dest_files=[ "res://.import/laser_ship.wav-ff6b78a8b09330c4c47f4bf622afd317.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
