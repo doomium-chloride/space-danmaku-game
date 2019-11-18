@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/sprite/Th14SakuyaBackSprite.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8.75018, 22.8016 )
+extents = Vector2( 4.94445, 20.5206 )
 
 [node name="player" type="KinematicBody2D"]
 script = ExtResource( 1 )

@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/background/white.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.00396, 10.2816 )
+extents = Vector2( 5.44697, 10.4005 )
 
 [node name="Enemy" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -13,4 +13,5 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="shape" type="CollisionShape2D" parent="."]
+scale = Vector2( 8, 5 )
 shape = SubResource( 1 )

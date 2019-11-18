@@ -4,10 +4,10 @@ extends "res://sauce/Enemy.gd"
 # var a = 2
 # var b = "text"
 const bullet_class = preload("res://sauce/bullet.tscn")
-const bullet_speed = 100
-const shoot_delay = 1.0
-var timer = null
 
+var shoot_delay = 1.0
+var timer = null
+var bullet_speed = 100
 var shoot_now = false
 
 # Called when the node enters the scene tree for the first time.

@@ -6,8 +6,9 @@ extends Node
 onready var global = get_node("/root/global")
 const enemy_testing = preload("res://sauce/Enemy.tscn")
 const enemy_pawn = preload("res://sauce/EnemyPawn.tscn")
+const enemy_drone = preload("res://sauce/EnemyDrone.tscn")
 
-export var spawn_delay = 2
+export var spawn_delay = 2.0
 
 var container = null
 var spawn_now = false
@@ -41,11 +42,13 @@ func spawn():
 		spawn_choice()
 		spawn_now = false
 func spawn_choice():
-	var sample = rand_range(0,2)
+	var sample = rand_range(1,3)
 	if sample < 1:
 		spawn_test()
 	elif sample < 2:
 		spawn_enemy(enemy_pawn)
+	elif sample < 3:
+		spawn_enemy(enemy_drone)
 	pass
 func spawn_test():
 	var enemy = enemy_testing.instance()
