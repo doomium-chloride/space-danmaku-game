@@ -4,7 +4,12 @@ const bullet_class = preload("res://sauce/bullet.tscn")
 onready var global = get_node("/root/global")
 # Declare member variables here. Examples:
 # var a = 2
-# var b = "text"
+# var b = "text
+
+var timestop_timer = null
+var timestop_recharge = 5.0
+const timestop_step = 0.01
+
 var danmaku_delay = 0.2
 var shoot_now = false
 
@@ -15,6 +20,13 @@ var moving = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	#init timestop timer
+	timestop_timer = get_node("timestop_timer")
+	timestop_timer.wait_time = timestop_step
+	timestop_timer.one_shot = false
+	timestop_timer.connect("timeout",get_node("."),"timestop_recharge")
+	timestop_timer.start()
 	if not global.is_connected("player_hit",self,"_on_player_hit"):
 		global.connect("player_hit",self,"_on_player_hit")
 	begin_shooting()
@@ -82,3 +94,18 @@ func _process(delta):
 func _on_player_hit():
 	print("player is hit")
 	pass
+	
+func timestop_add(number):
+	timestop_recharge += number
+	if timestop_recharge > 5.0:
+		timestop_recharge = 5.0
+	elif timestop_recharge < 0:
+		timestop_recharge = 0.0
+		global.time_stopped = false
+	global.emit_signal("timestop_counter",timestop_recharge)
+
+func timestop_recharge():
+	if global.time_stopped:
+		timestop_add(-1*timestop_step)
+	else:
+		timestop_add(timestop_step)
