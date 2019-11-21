@@ -1,21 +1,26 @@
 extends KinematicBody2D
 
-const bullet_class = preload("res://sauce/bullet.tscn")
+const bullet_class = preload("res://sauce/PlayerBullet.tscn")
 onready var global = get_node("/root/global")
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text
 
+
 var timestop_timer = null
 var timestop_recharge = 5.0
 const timestop_step = 0.01
 
-var danmaku_delay = 0.2
+const base_danmaku_delay = 0.2
+var danmaku_delay = base_danmaku_delay
 var shoot_now = false
 
-
-var speed = 200
+const base_speed = 200
+var speed = base_speed
 var moving = false
+
+const max_hp = 100
+var hp = max_hp
 
 
 # Called when the node enters the scene tree for the first time.
@@ -89,11 +94,19 @@ func _process(delta):
 	shoot()
 	if Input.is_action_just_pressed("toki"):
 		global.time_stopped = not global.time_stopped
+	if hp > max_hp:
+		hp = max_hp
+	if hp < 0:
+		print("player death")
+		pass
 	pass
 	
 func _on_player_hit():
-	print("player is hit")
 	pass
+
+func damage_player(damage):
+	hp -= damage
+	global.emit_signal("player_hp",hp)
 	
 func timestop_add(number):
 	timestop_recharge += number

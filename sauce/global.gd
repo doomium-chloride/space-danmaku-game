@@ -12,6 +12,7 @@ func _ready():
 signal enemy_hit
 signal player_hit
 signal timestop_counter(value)
+signal player_hp(value)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

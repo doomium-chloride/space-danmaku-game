@@ -9,6 +9,8 @@ export var of_player = false
 export var velocity = Vector2()
 export var damage = 5
 
+onready var bullet_sprite = get_node("Sprite")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process(true)
@@ -22,8 +24,6 @@ func _process(delta):
         queue_free()
 	pass
 
-
-
 func _on_bullet_body_shape_entered(body_id, body, body_shape, area_shape):
 	if of_player:
 		if body.get_name() != "player":
@@ -33,5 +33,6 @@ func _on_bullet_body_shape_entered(body_id, body, body_shape, area_shape):
 	else:
 		if body.get_name() == "player":
 			global.emit_signal("player_hit")
+			body.damage_player(damage)
 			queue_free()
 	pass # Replace with function body.

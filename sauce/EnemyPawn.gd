@@ -3,7 +3,7 @@ extends "res://sauce/Enemy.gd"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-const bullet_class = preload("res://sauce/bullet.tscn")
+const bullet_class = preload("res://sauce/EnemyBullet.tscn")
 
 var shoot_delay = 1.0
 var timer = null
