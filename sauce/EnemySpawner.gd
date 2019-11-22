@@ -9,6 +9,9 @@ const enemy_pawn = preload("res://sauce/EnemyPawn.tscn")
 const enemy_drone = preload("res://sauce/EnemyDrone.tscn")
 
 export var spawn_delay = 2.0
+export var enemy_weakest = 1
+export var enemy_strongest = 3
+export var spawn = true
 
 var container = null
 var spawn_now = false
@@ -29,6 +32,8 @@ func start_spawning():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if not spawn:
+		return
 	if global.time_stopped:
 		return
 	spawn()
@@ -42,7 +47,7 @@ func spawn():
 		spawn_choice()
 		spawn_now = false
 func spawn_choice():
-	var sample = rand_range(1,3)
+	var sample = rand_range(enemy_weakest,enemy_strongest)
 	if sample < 1:
 		spawn_test()
 	elif sample < 2:

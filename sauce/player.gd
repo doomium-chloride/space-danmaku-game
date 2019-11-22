@@ -98,6 +98,7 @@ func _process(delta):
 		hp = max_hp
 	if hp < 0:
 		print("player death")
+		global.goto_scene("res://scenes/TitleScreen.tcsn")
 		pass
 	pass
 	

@@ -13,6 +13,7 @@ onready var bullet_sprite = get_node("Sprite")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	global.connect("bullet_clear",self,"queue_free")
 	set_process(true)
 	pass # Replace with function body.
 
