@@ -12,8 +12,10 @@ export var time = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	pause_mode = Node.PAUSE_MODE_PROCESS
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
+	set_process(true)
 	pass # Replace with function body.
 signal enemy_hit
 signal player_hit
@@ -22,9 +24,9 @@ signal player_hp(value)
 signal boss_defeated
 signal bullet_clear
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+func _process(delta):
+	if Input.is_action_just_pressed("pause"):
+		get_tree().paused = not get_tree().paused
 
 # angle= 0 is straight down, 90 is right, -90 is left
 func get_down_angle_vector(angle):
@@ -59,3 +61,4 @@ func _deferred_goto_scene(path):
 
     # Optionally, to make it compatible with the SceneTree.change_scene() API.
     get_tree().set_current_scene(current_scene)
+	

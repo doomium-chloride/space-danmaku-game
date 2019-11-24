@@ -1,4 +1,4 @@
-extends "res://sauce/EnemyDrone.gd"
+extends "res://sauce/Enemies/EnemyDrone.gd"
 
 onready var spawner = get_parent().get_node("World/EnemySpawner")
 onready var player = get_parent().get_node("World/player")

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Chips Vol. 1 Evan King.ogg-bf2756af3abaf36d06eac6247d97f90a.oggstr"
+
+[deps]
+
+source_file="res://assets/music/Chips Vol. 1 Evan King.ogg"
+dest_files=[ "res://.import/Chips Vol. 1 Evan King.ogg-bf2756af3abaf36d06eac6247d97f90a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -4,9 +4,9 @@ extends Node
 # var a = 2
 # var b = "text"
 onready var global = get_node("/root/global")
-const enemy_testing = preload("res://sauce/Enemy.tscn")
-const enemy_pawn = preload("res://sauce/EnemyPawn.tscn")
-const enemy_drone = preload("res://sauce/EnemyDrone.tscn")
+const enemy_testing = preload("res://sauce/Enemies/Enemy.tscn")
+const enemy_pawn = preload("res://sauce/Enemies/EnemyPawn.tscn")
+const enemy_drone = preload("res://sauce/Enemies/EnemyDrone.tscn")
 
 export var spawn_delay = 2.0
 export var enemy_weakest = 1

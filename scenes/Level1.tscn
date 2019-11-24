@@ -1,10 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://sauce/LevelCountdown.gd" type="Script" id=1]
 [ext_resource path="res://assets/Blaster Faster - Assets Only/sprites/stars_far.png" type="Texture" id=2]
 [ext_resource path="res://sauce/stars_far.gd" type="Script" id=3]
 [ext_resource path="res://assets/Blaster Faster - Assets Only/sprites/stars_close.png" type="Texture" id=4]
-[ext_resource path="res://sauce/EnemySpawner.gd" type="Script" id=5]
+[ext_resource path="res://sauce/Enemies/EnemySpawner.gd" type="Script" id=5]
 [ext_resource path="res://sauce/player.gd" type="Script" id=6]
 [ext_resource path="res://assets/sprite/Th14SakuyaBackSprite.png" type="Texture" id=7]
 [ext_resource path="res://sauce/HUD.gd" type="Script" id=8]
@@ -14,6 +14,7 @@
 [ext_resource path="res://assets/HUD/hp_border.png" type="Texture" id=12]
 [ext_resource path="res://assets/HUD/hp_filling.png" type="Texture" id=13]
 [ext_resource path="res://sauce/dynamic_font_data.tres" type="DynamicFontData" id=14]
+[ext_resource path="res://assets/music/Chips Vol. 1 Evan King.ogg" type="AudioStream" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.75018, 22.8016 )
@@ -234,3 +235,7 @@ custom_fonts/font = SubResource( 2 )
 text = "100"
 
 [node name="Timer" type="Timer" parent="Countdown"]
+
+[node name="DefaultMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+autoplay = true

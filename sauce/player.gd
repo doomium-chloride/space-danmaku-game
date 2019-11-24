@@ -14,8 +14,9 @@ const timestop_step = 0.01
 const base_danmaku_delay = 0.2
 var danmaku_delay = base_danmaku_delay
 var shoot_now = false
+var bullet_speed = -500
 
-const base_speed = 200
+const base_speed = 300
 var speed = base_speed
 var moving = false
 
@@ -84,7 +85,7 @@ func shoot():
 func shoot_bullet():
 	var bullet = bullet_class.instance()
 	bullet.of_player = true
-	bullet.velocity.y = -300
+	bullet.velocity.y = bullet_speed
 	bullet.position = position
 	get_tree().get_root().add_child(bullet)
 	

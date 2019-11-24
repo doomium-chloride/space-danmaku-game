@@ -8,6 +8,7 @@ onready var timer = get_node("Countdown/Timer")
 onready var player = get_node("World/player")
 var start_time = 100
 var current_time = start_time
+export var next_scene = "res://scenes/Monologues/Boss1Monologue.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,7 +25,7 @@ func countdown():
 		global.hp = player.hp
 		global.time = player.timestop_recharge
 		global.emit_signal("bullet_clear")
-		global.goto_scene("res://scenes/Boss1.tscn")
+		global.goto_scene(next_scene)
 		pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
