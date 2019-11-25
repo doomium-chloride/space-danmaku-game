@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/new-distorton-Bit-Bit-Loop.ogg-32cdc3bf1f476c9f240a1c5099a3c79d.oggstr"
+
+[deps]
+
+source_file="res://assets/music/m/new-distorton-Bit-Bit-Loop.ogg"
+dest_files=[ "res://.import/new-distorton-Bit-Bit-Loop.ogg-32cdc3bf1f476c9f240a1c5099a3c79d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

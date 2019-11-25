@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/music/m/distirted Bit Bit Loop.ogg" type="AudioStream" id=1]
+[ext_resource path="res://assets/music/m/new-distorton-Bit-Bit-Loop.ogg" type="AudioStream" id=1]
 [ext_resource path="res://sauce/Music/DefaultMusicStopped.gd" type="Script" id=2]
 
 [node name="DefaultMusicStopped" type="AudioStreamPlayer"]
