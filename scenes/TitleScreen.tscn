@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://sauce/Start.gd" type="Script" id=1]
+[ext_resource path="res://sauce/Menu/Start.gd" type="Script" id=1]
 [ext_resource path="res://assets/font/font_big.tres" type="DynamicFont" id=2]
-[ext_resource path="res://assets/music/Chips Vol. 1 Evan King.ogg" type="AudioStream" id=3]
+[ext_resource path="res://sauce/Menu/Tutorial.gd" type="Script" id=3]
+[ext_resource path="res://assets/music/m/new Bit Bit Loop.ogg" type="AudioStream" id=4]
+[ext_resource path="res://sauce/Music/DefaultMusic.gd" type="Script" id=5]
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
@@ -40,6 +42,7 @@ margin_top = 104.0
 margin_right = 500.0
 margin_bottom = 204.0
 rect_min_size = Vector2( 500, 100 )
+script = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Menu/Centre/Buttons/Tutorial"]
 margin_right = 550.0
@@ -60,6 +63,8 @@ custom_fonts/font = ExtResource( 2 )
 text = "Credits"
 
 [node name="DefaultMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 4 )
 autoplay = true
+script = ExtResource( 5 )
 [connection signal="pressed" from="Menu/Centre/Buttons/Start" to="Menu/Centre/Buttons/Start" method="_on_Start_pressed"]
+[connection signal="pressed" from="Menu/Centre/Buttons/Tutorial" to="Menu/Centre/Buttons/Tutorial" method="_on_Tutorial_pressed"]

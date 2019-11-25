@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/Blaster Faster - Assets Only/sprites/stars_far.png" type="Texture" id=1]
 [ext_resource path="res://sauce/stars_far.gd" type="Script" id=2]
@@ -15,7 +15,10 @@
 [ext_resource path="res://sauce/Bosses/Boss1.gd" type="Script" id=13]
 [ext_resource path="res://assets/sprite/enemy/boss1.png" type="Texture" id=14]
 [ext_resource path="res://sauce/dynamic_font_data.tres" type="DynamicFontData" id=15]
-[ext_resource path="res://assets/music/Chips Vol. 1 Evan King.ogg" type="AudioStream" id=16]
+[ext_resource path="res://assets/music/m/new Bit Bit Loop.ogg" type="AudioStream" id=16]
+[ext_resource path="res://sauce/Music/DefaultMusic.gd" type="Script" id=17]
+[ext_resource path="res://assets/music/m/distirted Bit Bit Loop.ogg" type="AudioStream" id=18]
+[ext_resource path="res://sauce/Music/DefaultMusicStopped.gd" type="Script" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.75018, 22.8016 )
@@ -31,7 +34,6 @@ font_data = ExtResource( 15 )
 [node name="Boss1" type="Node2D"]
 
 [node name="World" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="stars" type="Node2D" parent="World"]
 
@@ -199,6 +201,10 @@ autostart = true
 wait_time = 5.0
 one_shot = true
 
+[node name="invincibility_timer" type="Timer" parent="World/player"]
+wait_time = 0.5
+one_shot = true
+
 [node name="HUD" type="Control" parent="World"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -258,3 +264,9 @@ text = "500"
 [node name="DefaultMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 16 )
 autoplay = true
+script = ExtResource( 17 )
+
+[node name="DefaultMusicStopped" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+autoplay = true
+script = ExtResource( 19 )

@@ -5,11 +5,16 @@ onready var global = get_node("/root/global")
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text
+var on_death = "res://scenes/TitleScreen.tscn"
 
 
 var timestop_timer = null
 var timestop_recharge = 5.0
 const timestop_step = 0.01
+
+var is_invincible = false
+var invincible = null
+var invincible_time = 0.5
 
 const base_danmaku_delay = 0.2
 var danmaku_delay = base_danmaku_delay
@@ -33,9 +38,17 @@ func _ready():
 	timestop_timer.one_shot = false
 	timestop_timer.connect("timeout",get_node("."),"timestop_recharge")
 	timestop_timer.start()
+	
 	if not global.is_connected("player_hit",self,"_on_player_hit"):
 		global.connect("player_hit",self,"_on_player_hit")
 	begin_shooting()
+	
+	invincible = get_node("invincibility_timer")
+	invincible.wait_time = invincible_time
+	invincible.one_shot = true
+	invincible.connect("timeout",self,"end_invincibility")
+	
+	
 	set_process(true)
 	pass
 
@@ -99,7 +112,8 @@ func _process(delta):
 		hp = max_hp
 	if hp < 0:
 		print("player death")
-		global.goto_scene("res://scenes/TitleScreen.tcsn")
+		global.emit_signal("bullet_clear")
+		global.goto_scene(on_death)
 		pass
 	pass
 	
@@ -107,6 +121,11 @@ func _on_player_hit():
 	pass
 
 func damage_player(damage):
+	if is_invincible:
+		return
+	else:
+		is_invincible = true
+		invincible.start()
 	hp -= damage
 	global.emit_signal("player_hp",hp)
 	
@@ -124,3 +143,6 @@ func timestop_recharge():
 		timestop_add(-1*timestop_step)
 	else:
 		timestop_add(timestop_step)
+		
+func end_invincibility():
+	is_invincible = false

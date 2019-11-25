@@ -13,7 +13,6 @@
 [ext_resource path="res://assets/HUD/hp_border.png" type="Texture" id=11]
 [ext_resource path="res://assets/HUD/hp_filling.png" type="Texture" id=12]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.75018, 22.8016 )
 
@@ -183,6 +182,10 @@ autostart = true
 
 [node name="timestop_timer" type="Timer" parent="player"]
 wait_time = 5.0
+one_shot = true
+
+[node name="invincibility_timer" type="Timer" parent="player"]
+wait_time = 0.5
 one_shot = true
 
 [node name="HUD" type="Control" parent="."]

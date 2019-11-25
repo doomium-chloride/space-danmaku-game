@@ -15,6 +15,7 @@ export var next_scene = "res://scenes/TitleScreen.tscn"
 
 func _ready():
 	connect("next",self,"next_text")
+	connect("skip",self,"skip_monologue")
 	textbox.text = text_array[current]
 	set_process(true)
 	pass
@@ -28,7 +29,10 @@ func add_text(text):
 func next_text():
 	current += 1
 	if current >= text_array.size():
-		global.goto_scene(next_scene)
+		skip_monologue()
 	else:
 		textbox.text = text_array[current]
+		
+func skip_monologue():
+	global.goto_scene(next_scene)
 	

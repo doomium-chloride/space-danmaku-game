@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/new Bit Bit Loop.ogg-9ebbede19896a789df9fcfae9d1088e3.oggstr"
+
+[deps]
+
+source_file="res://assets/music/m/new Bit Bit Loop.ogg"
+dest_files=[ "res://.import/new Bit Bit Loop.ogg-9ebbede19896a789df9fcfae9d1088e3.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
