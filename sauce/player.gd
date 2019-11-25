@@ -113,6 +113,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("toki"):
 		timestopFX.play()
 		global.time_stopped = not global.time_stopped
+		global.emit_signal("timestop")
 	if hp > max_hp:
 		hp = max_hp
 	if hp < 0:

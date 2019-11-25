@@ -24,6 +24,7 @@ signal timestop_counter(value)
 signal player_hp(value)
 signal boss_defeated
 signal bullet_clear
+signal timestop
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
