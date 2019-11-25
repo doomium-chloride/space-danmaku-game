@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://sauce/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprite/Th14SakuyaBackSprite.png" type="Texture" id=2]
+[ext_resource path="res://assets/soundFX/Za Warudo.ogg" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.94445, 20.5206 )
@@ -24,3 +25,6 @@ wait_time = 0.01
 [node name="invincibility_timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="TimestopFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )

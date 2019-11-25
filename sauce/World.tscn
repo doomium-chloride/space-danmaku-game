@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/Blaster Faster - Assets Only/sprites/stars_far.png" type="Texture" id=1]
 [ext_resource path="res://sauce/stars_far.gd" type="Script" id=2]
@@ -6,12 +6,13 @@
 [ext_resource path="res://sauce/Enemies/EnemySpawner.gd" type="Script" id=4]
 [ext_resource path="res://sauce/player.gd" type="Script" id=5]
 [ext_resource path="res://assets/sprite/Th14SakuyaBackSprite.png" type="Texture" id=6]
-[ext_resource path="res://sauce/HUD.gd" type="Script" id=7]
-[ext_resource path="res://assets/HUD/timebar_background.png" type="Texture" id=8]
-[ext_resource path="res://assets/HUD/timebar_border.png" type="Texture" id=9]
-[ext_resource path="res://assets/HUD/timebar_filling.png" type="Texture" id=10]
-[ext_resource path="res://assets/HUD/hp_border.png" type="Texture" id=11]
-[ext_resource path="res://assets/HUD/hp_filling.png" type="Texture" id=12]
+[ext_resource path="res://assets/soundFX/Za Warudo.ogg" type="AudioStream" id=7]
+[ext_resource path="res://sauce/HUD.gd" type="Script" id=8]
+[ext_resource path="res://assets/HUD/timebar_background.png" type="Texture" id=9]
+[ext_resource path="res://assets/HUD/timebar_border.png" type="Texture" id=10]
+[ext_resource path="res://assets/HUD/timebar_filling.png" type="Texture" id=11]
+[ext_resource path="res://assets/HUD/hp_border.png" type="Texture" id=12]
+[ext_resource path="res://assets/HUD/hp_filling.png" type="Texture" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.75018, 22.8016 )
@@ -188,10 +189,13 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="TimestopFX" type="AudioStreamPlayer" parent="player"]
+stream = ExtResource( 7 )
+
 [node name="HUD" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
 [node name="TimestopBar" type="TextureProgress" parent="HUD"]
 margin_left = 10.0
@@ -201,9 +205,9 @@ margin_bottom = 70.0
 rect_scale = Vector2( 0.5, 0.3 )
 max_value = 5.0
 step = 0.01
-texture_under = ExtResource( 8 )
-texture_over = ExtResource( 9 )
-texture_progress = ExtResource( 10 )
+texture_under = ExtResource( 9 )
+texture_over = ExtResource( 10 )
+texture_progress = ExtResource( 11 )
 fill_mode = 6
 
 [node name="HealthBar" type="TextureProgress" parent="HUD"]
@@ -213,6 +217,6 @@ margin_right = 790.0
 margin_bottom = 70.0
 rect_scale = Vector2( 0.5, 0.3 )
 value = 100.0
-texture_over = ExtResource( 11 )
-texture_progress = ExtResource( 12 )
+texture_over = ExtResource( 12 )
+texture_progress = ExtResource( 13 )
 fill_mode = 1

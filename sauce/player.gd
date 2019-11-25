@@ -11,6 +11,7 @@ var on_death = "res://scenes/TitleScreen.tscn"
 var timestop_timer = null
 var timestop_recharge = 5.0
 const timestop_step = 0.01
+onready var timestopFX = get_node("TimestopFX")
 
 var is_invincible = false
 var invincible = null
@@ -31,7 +32,8 @@ var hp = max_hp
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	#don't loop timestopFX
+	timestopFX.stream.loop = false
 	#init timestop timer
 	timestop_timer = get_node("timestop_timer")
 	timestop_timer.wait_time = timestop_step
@@ -77,7 +79,9 @@ func _physics_process(delta):
 	var collision = move_and_collide(move_vec * speed * delta)
 	if collision:
 		print(collision.collider.get_name())
-		pass
+		collision.collider.got_hit(1)
+		damage_player(1)
+
 	
 func begin_shooting():
 	var danmaku_timer = get_node("danmaku_timer")
@@ -107,6 +111,7 @@ func shoot_bullet():
 func _process(delta):
 	shoot()
 	if Input.is_action_just_pressed("toki"):
+		timestopFX.play()
 		global.time_stopped = not global.time_stopped
 	if hp > max_hp:
 		hp = max_hp
@@ -121,11 +126,11 @@ func _on_player_hit():
 	pass
 
 func damage_player(damage):
-	if is_invincible:
-		return
-	else:
-		is_invincible = true
-		invincible.start()
+#	if is_invincible:
+#		return
+#	else:
+#		is_invincible = true
+#		invincible.start()
 	hp -= damage
 	global.emit_signal("player_hp",hp)
 	

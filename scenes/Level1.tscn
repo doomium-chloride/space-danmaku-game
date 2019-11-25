@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://sauce/LevelCountdown.gd" type="Script" id=1]
 [ext_resource path="res://assets/Blaster Faster - Assets Only/sprites/stars_far.png" type="Texture" id=2]
@@ -7,24 +7,25 @@
 [ext_resource path="res://sauce/Enemies/EnemySpawner.gd" type="Script" id=5]
 [ext_resource path="res://sauce/player.gd" type="Script" id=6]
 [ext_resource path="res://assets/sprite/Th14SakuyaBackSprite.png" type="Texture" id=7]
-[ext_resource path="res://sauce/HUD.gd" type="Script" id=8]
-[ext_resource path="res://assets/HUD/timebar_background.png" type="Texture" id=9]
-[ext_resource path="res://assets/HUD/timebar_border.png" type="Texture" id=10]
-[ext_resource path="res://assets/HUD/timebar_filling.png" type="Texture" id=11]
-[ext_resource path="res://assets/HUD/hp_border.png" type="Texture" id=12]
-[ext_resource path="res://assets/HUD/hp_filling.png" type="Texture" id=13]
-[ext_resource path="res://sauce/dynamic_font_data.tres" type="DynamicFontData" id=14]
-[ext_resource path="res://assets/music/m/new Bit Bit Loop.ogg" type="AudioStream" id=15]
-[ext_resource path="res://sauce/Music/DefaultMusic.gd" type="Script" id=16]
-[ext_resource path="res://assets/music/m/new-distorton-Bit-Bit-Loop.ogg" type="AudioStream" id=17]
-[ext_resource path="res://sauce/Music/DefaultMusicStopped.gd" type="Script" id=18]
+[ext_resource path="res://assets/soundFX/Za Warudo.ogg" type="AudioStream" id=8]
+[ext_resource path="res://sauce/HUD.gd" type="Script" id=9]
+[ext_resource path="res://assets/HUD/timebar_background.png" type="Texture" id=10]
+[ext_resource path="res://assets/HUD/timebar_border.png" type="Texture" id=11]
+[ext_resource path="res://assets/HUD/timebar_filling.png" type="Texture" id=12]
+[ext_resource path="res://assets/HUD/hp_border.png" type="Texture" id=13]
+[ext_resource path="res://assets/HUD/hp_filling.png" type="Texture" id=14]
+[ext_resource path="res://sauce/dynamic_font_data.tres" type="DynamicFontData" id=15]
+[ext_resource path="res://assets/music/m/new Bit Bit Loop.ogg" type="AudioStream" id=16]
+[ext_resource path="res://sauce/Music/DefaultMusic.gd" type="Script" id=17]
+[ext_resource path="res://assets/music/m/new-distorton-Bit-Bit-Loop.ogg" type="AudioStream" id=18]
+[ext_resource path="res://sauce/Music/DefaultMusicStopped.gd" type="Script" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.75018, 22.8016 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 30
-font_data = ExtResource( 14 )
+font_data = ExtResource( 15 )
 
 [node name="Level1" type="Node2D"]
 script = ExtResource( 1 )
@@ -201,10 +202,13 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="TimestopFX" type="AudioStreamPlayer" parent="World/player"]
+stream = ExtResource( 8 )
+
 [node name="HUD" type="Control" parent="World"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="TimestopBar" type="TextureProgress" parent="World/HUD"]
 margin_left = 10.0
@@ -214,9 +218,9 @@ margin_bottom = 70.0
 rect_scale = Vector2( 0.5, 0.3 )
 max_value = 5.0
 step = 0.01
-texture_under = ExtResource( 9 )
-texture_over = ExtResource( 10 )
-texture_progress = ExtResource( 11 )
+texture_under = ExtResource( 10 )
+texture_over = ExtResource( 11 )
+texture_progress = ExtResource( 12 )
 fill_mode = 6
 
 [node name="HealthBar" type="TextureProgress" parent="World/HUD"]
@@ -226,8 +230,8 @@ margin_right = 790.0
 margin_bottom = 70.0
 rect_scale = Vector2( 0.5, 0.3 )
 value = 100.0
-texture_over = ExtResource( 12 )
-texture_progress = ExtResource( 13 )
+texture_over = ExtResource( 13 )
+texture_progress = ExtResource( 14 )
 fill_mode = 1
 
 [node name="Countdown" type="Control" parent="."]
@@ -244,11 +248,11 @@ text = "100"
 [node name="Timer" type="Timer" parent="Countdown"]
 
 [node name="DefaultMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 15 )
+stream = ExtResource( 16 )
 autoplay = true
-script = ExtResource( 16 )
+script = ExtResource( 17 )
 
 [node name="DefaultMusicStopped" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 17 )
+stream = ExtResource( 18 )
 autoplay = true
-script = ExtResource( 18 )
+script = ExtResource( 19 )
