@@ -4,7 +4,7 @@ onready var spawner = get_parent().get_node("World/EnemySpawner")
 onready var player = get_parent().get_node("World/player")
 onready var label = get_parent().get_node("Control/Label")
 
-export var max_hp = 500
+export var max_hp = 1000
 
 func random_direction():
 	var x_length = get_viewport_rect().size.x
@@ -12,22 +12,22 @@ func random_direction():
 	var angle = 0
 	if position.x < x_length*0.1:
 		if position.y > y_length*0.9:
-			angle = rand_range(90,180)
+			angle = rand_range(90,181)
 		elif position.y < y_length*0.1:
-			angle = rand_range(0,90)
+			angle = rand_range(0,91)
 		else:
-			angle = rand_range(0,180)
+			angle = rand_range(0,181)
 	elif position.x > x_length*0.9:
 		if position.y > y_length*0.9:
-			angle = rand_range(-180,-90)
+			angle = rand_range(-180,-89)
 		elif position.y < y_length*0.1:
-			angle = rand_range(-90,0)
+			angle = rand_range(-90,1)
 		else:
-			angle = rand_range(-180,0)
+			angle = rand_range(-180,1)
 	elif position.y > y_length*0.5:
-		angle = rand_range(90,270)
+		angle = rand_range(90,271)
 	elif position.y < y_length*0.1:
-		angle = rand_range(-90,90)
+		angle = rand_range(-90,91)
 	else:
 		angle = rand_range(-180,180)
 	return global.get_down_angle_vector(angle)

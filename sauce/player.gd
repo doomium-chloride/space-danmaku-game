@@ -7,7 +7,6 @@ onready var global = get_node("/root/global")
 # var b = "text
 var on_death = "res://scenes/TitleScreen.tscn"
 
-
 var timestop_timer = null
 var timestop_recharge = 5.0
 const timestop_step = 0.01
@@ -20,7 +19,9 @@ var invincible_time = 0.5
 const base_danmaku_delay = 0.2
 var danmaku_delay = base_danmaku_delay
 var shoot_now = false
-var bullet_speed = -500
+var bullet_speed = 500
+var bullet_damage = 5
+var danmaku_timer = null
 
 const base_speed = 300
 var speed = base_speed
@@ -29,6 +30,7 @@ var moving = false
 const max_hp = 100
 var hp = max_hp
 
+var shoot_style = "basic"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,11 +47,16 @@ func _ready():
 		global.connect("player_hit",self,"_on_player_hit")
 	begin_shooting()
 	
+	if not global.is_connected("health_pack",self,"heal"):
+		global.connect("health_pack",self,"heal")
+	
+	if not global.is_connected("style_change",self,"change_style"):
+		global.connect("style_change",self,"change_style")
+	
 	invincible = get_node("invincibility_timer")
 	invincible.wait_time = invincible_time
 	invincible.one_shot = true
 	invincible.connect("timeout",self,"end_invincibility")
-	
 	
 	set_process(true)
 	pass
@@ -84,7 +91,7 @@ func _physics_process(delta):
 
 	
 func begin_shooting():
-	var danmaku_timer = get_node("danmaku_timer")
+	danmaku_timer = get_node("danmaku_timer")
 	danmaku_timer.wait_time = danmaku_delay
 	danmaku_timer.connect("timeout",get_node("."),"shoot_again")
 	danmaku_timer.start()
@@ -96,24 +103,42 @@ func shoot_again():
 
 func shoot():
 	if shoot_now:
-		shoot_bullet()
+		if shoot_style == "basic":
+			basic_shoot()
+		elif shoot_style == "spread":
+			danmaku_timer.wait_time = 1
+			spread_shoot()
+		elif shoot_style == "narrow":
+			shoot_bullet()
 		shoot_now = false
 
-func shoot_bullet():
+func shoot_bullet(angle = 0, pos = position):
 	var bullet = bullet_class.instance()
 	bullet.of_player = true
-	bullet.velocity.y = bullet_speed
-	bullet.position = position
+	bullet.damage = bullet_damage
+	bullet.velocity = bullet_speed * global.get_up_angle_vector(angle)
+	bullet.position = pos
 	get_tree().get_root().add_child(bullet)
 	
+func spread_shoot():
+	for i in range(-20,21,5):
+		shoot_bullet(i)
+	pass
+
+func basic_shoot():
+	shoot_bullet(0,position + Vector2(-15,0))
+	shoot_bullet()
+	shoot_bullet(0,position + Vector2(15,0))
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	shoot()
 	if Input.is_action_just_pressed("toki"):
-		timestopFX.play()
 		global.time_stopped = not global.time_stopped
 		global.emit_signal("timestop")
+		if global.time_stopped:
+			timestopFX.play()
 	if hp > max_hp:
 		hp = max_hp
 	if hp < 0:
@@ -149,7 +174,16 @@ func timestop_recharge():
 	if global.time_stopped:
 		timestop_add(-1*timestop_step)
 	else:
-		timestop_add(timestop_step)
+		timestop_add(timestop_step*0.5)
 		
 func end_invincibility():
 	is_invincible = false
+	
+func heal(value):
+	damage_player(-value)
+	
+func change_style(style,delay,damage):
+	shoot_style = style
+	danmaku_timer.wait_time = delay
+	bullet_damage = damage
+	pass

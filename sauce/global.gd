@@ -25,6 +25,9 @@ signal player_hp(value)
 signal boss_defeated
 signal bullet_clear
 signal timestop
+
+signal health_pack(value)
+signal style_change(style,delay,damage)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
@@ -34,6 +37,10 @@ func _process(delta):
 func get_down_angle_vector(angle):
 	var rad = deg2rad(angle)
 	return Vector2(sin(rad),cos(rad))
+	
+func get_up_angle_vector(angle):
+	var rad = deg2rad(angle)
+	return Vector2(sin(rad),-cos(rad))
 	
 func goto_scene(path):
     # This function will usually be called from a signal callback,

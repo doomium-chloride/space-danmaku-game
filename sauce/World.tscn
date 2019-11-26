@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/background/stars_far.png" type="Texture" id=1]
 [ext_resource path="res://sauce/stars_far.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/HUD/hp_filling.png" type="Texture" id=13]
 [ext_resource path="res://assets/background/shatter.png" type="Texture" id=14]
 [ext_resource path="res://sauce/Shatter.gd" type="Script" id=15]
+[ext_resource path="res://sauce/PowerUp/PowerUpSpawner.gd" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.75018, 22.8016 )
@@ -209,3 +210,10 @@ fill_mode = 1
 texture = ExtResource( 14 )
 offset = Vector2( 300, 350 )
 script = ExtResource( 15 )
+
+[node name="PowerUpSpawner" type="Node" parent="."]
+script = ExtResource( 16 )
+
+[node name="Container" type="Node" parent="PowerUpSpawner"]
+
+[node name="Timer" type="Timer" parent="PowerUpSpawner"]
