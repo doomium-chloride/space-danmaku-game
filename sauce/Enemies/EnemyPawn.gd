@@ -12,6 +12,7 @@ var shoot_now = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	global.connect("timestop",self,"pause_shoot_timer")
 	velocity.y = 100
 	begin_shooting()
 	set_process(true)
@@ -43,3 +44,6 @@ func _process(delta):
 		return
 	shoot()
 	pass
+
+func pause_shoot_timer():
+	timer.paused = global.time_stopped

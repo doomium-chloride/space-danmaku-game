@@ -186,13 +186,13 @@ margin_left = 10.0
 margin_top = 10.0
 margin_right = 410.0
 margin_bottom = 70.0
-rect_scale = Vector2( 0.5, 0.3 )
+rect_scale = Vector2( 0.5, 0.5 )
 max_value = 5.0
 step = 0.01
 texture_under = ExtResource( 9 )
 texture_over = ExtResource( 10 )
 texture_progress = ExtResource( 11 )
-fill_mode = 6
+fill_mode = 4
 
 [node name="HealthBar" type="TextureProgress" parent="HUD"]
 margin_left = 390.0

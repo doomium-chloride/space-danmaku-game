@@ -18,6 +18,7 @@ var spawn_now = false
 var timer = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	global.connect("timestop",self,"pause_spawn_timer")
 	timer = get_node("Timer")
 	container = get_node("Container")
 	start_spawning()
@@ -71,3 +72,6 @@ func choose_location():
 	var x = rand_range(10,x_max-10)
 	var y = -10
 	return Vector2(x,y)
+	
+func pause_spawn_timer():
+	timer.paused = global.time_stopped

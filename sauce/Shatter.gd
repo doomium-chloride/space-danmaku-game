@@ -12,7 +12,7 @@ func _ready():
 	pass # Replace with function body.
 
 func toggle_visibility():
-	if visible:
-		hide()
-	else:
+	if global.time_stopped:
 		show()
+	else:
+		hide()

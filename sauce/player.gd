@@ -142,6 +142,7 @@ func timestop_add(number):
 	elif timestop_recharge < 0:
 		timestop_recharge = 0.0
 		global.time_stopped = false
+		global.emit_signal("timestop")
 	global.emit_signal("timestop_counter",timestop_recharge)
 
 func timestop_recharge():
