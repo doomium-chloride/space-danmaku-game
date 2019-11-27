@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Goodnightmare-reverb.ogg-7ccc7d9537d4778ba6e3a0ed8289abe8.oggstr"
+
+[deps]
+
+source_file="res://assets/music/Goodnightmare-reverb.ogg"
+dest_files=[ "res://.import/Goodnightmare-reverb.ogg-7ccc7d9537d4778ba6e3a0ed8289abe8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

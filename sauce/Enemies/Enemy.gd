@@ -6,6 +6,8 @@ extends KinematicBody2D
 
 onready var global = get_node("/root/global")
 
+const of_player = false
+
 export var hp = 10
 export var velocity = Vector2()
 

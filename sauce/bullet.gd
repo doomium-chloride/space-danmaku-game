@@ -27,13 +27,16 @@ func _process(delta):
 
 func _on_bullet_body_shape_entered(body_id, body, body_shape, area_shape):
 	if of_player:
-		if body.get_name() != "player":
+		if not body.of_player:
 			global.emit_signal("enemy_hit")
 			body.got_hit(damage)
 			queue_free()
 	else:
 		if body.get_name() == "player":
-			global.emit_signal("player_hit")
-			body.damage_player(damage)
+			global.emit_signal("player_hit",damage)
+			queue_free()
+		elif body.get_name() == "Shield":
+			print("shield hit")
+			body.damage(damage)
 			queue_free()
 	pass # Replace with function body.

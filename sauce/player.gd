@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const bullet_class = preload("res://sauce/PlayerBullet.tscn")
+const shield_class = preload("res://sauce/PowerUp/Shield.tscn")
 onready var global = get_node("/root/global")
 # Declare member variables here. Examples:
 # var a = 2
@@ -22,15 +23,18 @@ var shoot_now = false
 var bullet_speed = 500
 var bullet_damage = 5
 var danmaku_timer = null
+var danmaku_delay_mod = 1
 
 const base_speed = 300
 var speed = base_speed
 var moving = false
 
+const of_player = true
+
 const max_hp = 100
 var hp = max_hp
 
-var shoot_style = "basic"
+var shoot_style = "flat"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -58,7 +62,12 @@ func _ready():
 	invincible.one_shot = true
 	invincible.connect("timeout",self,"end_invincibility")
 	
+	change_style("flat",0.2)
+	
 	set_process(true)
+	
+	
+	
 	pass
 
 func _physics_process(delta):
@@ -85,9 +94,10 @@ func _physics_process(delta):
 	move_vec = move_vec.normalized()
 	var collision = move_and_collide(move_vec * speed * delta)
 	if collision:
-		print(collision.collider.get_name())
-		collision.collider.got_hit(1)
-		damage_player(1)
+		#print(collision.collider.get_name())
+		if not collision.collider.of_player:
+			collision.collider.got_hit(1)
+			damage_player(1)
 
 	
 func begin_shooting():
@@ -103,7 +113,7 @@ func shoot_again():
 
 func shoot():
 	if shoot_now:
-		if shoot_style == "basic":
+		if shoot_style == "flat":
 			basic_shoot()
 		elif shoot_style == "spread":
 			danmaku_timer.wait_time = 1
@@ -145,11 +155,23 @@ func _process(delta):
 		print("player death")
 		global.emit_signal("bullet_clear")
 		global.goto_scene(on_death)
-		pass
-	pass
 	
-func _on_player_hit():
-	pass
+	# Style syntax for shooting style change
+	# change_style(style,delay,damage=5)
+	if Input.is_action_just_pressed("FlatStyle"):
+		change_style("flat",0.2)
+	if Input.is_action_just_pressed("WideStyle"):
+		change_style("spread",1.0)
+	if Input.is_action_just_pressed("NarrowStyle"):
+		change_style("narrow",0.05)
+		
+	# testing code
+	if Input.is_action_just_pressed("test"):
+		add_shield()
+
+	
+func _on_player_hit(damage):
+	damage_player(damage)
 
 func damage_player(damage):
 #	if is_invincible:
@@ -182,8 +204,15 @@ func end_invincibility():
 func heal(value):
 	damage_player(-value)
 	
-func change_style(style,delay,damage):
+func change_style(style,delay,damage = 5):
 	shoot_style = style
-	danmaku_timer.wait_time = delay
+	danmaku_timer.wait_time = delay * danmaku_delay_mod
 	bullet_damage = damage
+	danmaku_timer.start()
 	pass
+	
+func add_shield():
+	var shield = shield_class.instance()
+	shield.angle = rand_range(0,360)
+	print("added ",shield.get_name())
+	add_child(shield)

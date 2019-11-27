@@ -12,7 +12,7 @@ const narrow = preload("res://sauce/PowerUp/NarrowStyle.tscn")
 export var spawn_delay = 3.0
 export var spawn = true
 
-var list = [health, spread, normal, narrow]
+var list = [health]
 
 var container = null
 var spawn_now = false

@@ -19,7 +19,7 @@ func _ready():
 	set_process(true)
 	pass # Replace with function body.
 signal enemy_hit
-signal player_hit
+signal player_hit(damage)
 signal timestop_counter(value)
 signal player_hp(value)
 signal boss_defeated

@@ -1,7 +1,7 @@
 extends "res://sauce/PowerUp/SpreadStyle.gd"
 
 func _ready():
-	style = "basic"
+	style = "flat"
 	delay = 0.2
 	damage = 5
 	
