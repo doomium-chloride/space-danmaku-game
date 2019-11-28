@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 const bullet_class = preload("res://sauce/PlayerBullet.tscn")
 const shield_class = preload("res://sauce/PowerUp/Shield.tscn")
+const DamageUp = preload("res://sauce/PowerUp/DamageUp.tscn")
 onready var global = get_node("/root/global")
 # Declare member variables here. Examples:
 # var a = 2
@@ -22,6 +23,7 @@ var danmaku_delay = base_danmaku_delay
 var shoot_now = false
 var bullet_speed = 500
 var bullet_damage = 5
+var bullet_damage_bonus = 0
 var danmaku_timer = null
 var danmaku_delay_mod = 1
 
@@ -35,6 +37,9 @@ const max_hp = 100
 var hp = max_hp
 
 var shoot_style = "flat"
+
+var powerup_container = null
+var powerup_names = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -62,7 +67,10 @@ func _ready():
 	invincible.one_shot = true
 	invincible.connect("timeout",self,"end_invincibility")
 	
-	change_style("flat",0.2)
+	powerup_container = Node2D.new()
+	add_child(powerup_container)
+	
+	change_style("narrow",0.1)
 	
 	set_process(true)
 	
@@ -72,7 +80,7 @@ func _ready():
 
 func _physics_process(delta):
 	var move_vec = Vector2()
-	#movement controls
+	# movement controls
 	if Input.is_action_pressed("move_up"):
 		move_vec.y -= 1
 	if Input.is_action_pressed("move_down"):
@@ -81,7 +89,7 @@ func _physics_process(delta):
 		move_vec.x -= 1
 	if Input.is_action_pressed("move_right"):
 		move_vec.x += 1
-	#borders
+	# Stop the player from leaving the view
 	if position.y < scale.y:
 		move_vec.y = max(move_vec.y,0)
 	if position.y > get_viewport_rect().size.y*scale.y:
@@ -92,6 +100,7 @@ func _physics_process(delta):
 		move_vec.x = min(move_vec.x,0)
 	moving = move_vec.length() != 0
 	move_vec = move_vec.normalized()
+	#check for collisions
 	var collision = move_and_collide(move_vec * speed * delta)
 	if collision:
 		#print(collision.collider.get_name())
@@ -125,13 +134,13 @@ func shoot():
 func shoot_bullet(angle = 0, pos = position):
 	var bullet = bullet_class.instance()
 	bullet.of_player = true
-	bullet.damage = bullet_damage
+	bullet.damage = bullet_damage + bullet_damage_bonus
 	bullet.velocity = bullet_speed * global.get_up_angle_vector(angle)
 	bullet.position = pos
 	get_tree().get_root().add_child(bullet)
 	
 func spread_shoot():
-	for i in range(-20,21,5):
+	for i in range(-10,11,2):
 		shoot_bullet(i)
 	pass
 
@@ -147,6 +156,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("toki"):
 		global.time_stopped = not global.time_stopped
 		global.emit_signal("timestop")
+		refresh_powerups()
 		if global.time_stopped:
 			timestopFX.play()
 	if hp > max_hp:
@@ -159,19 +169,20 @@ func _process(delta):
 	# Style syntax for shooting style change
 	# change_style(style,delay,damage=5)
 	if Input.is_action_just_pressed("FlatStyle"):
-		change_style("flat",0.2)
+		change_style("flat",0.3)
 	if Input.is_action_just_pressed("WideStyle"):
-		change_style("spread",1.0)
+		change_style("spread",1.1)
 	if Input.is_action_just_pressed("NarrowStyle"):
-		change_style("narrow",0.05)
+		change_style("narrow",0.1)
 		
 	# testing code
 	if Input.is_action_just_pressed("test"):
-		add_shield()
+		add_powerup()
 
 	
 func _on_player_hit(damage):
 	damage_player(damage)
+	lose_powerup()
 
 func damage_player(damage):
 #	if is_invincible:
@@ -206,7 +217,7 @@ func heal(value):
 	
 func change_style(style,delay,damage = 5):
 	shoot_style = style
-	danmaku_timer.wait_time = delay * danmaku_delay_mod
+	danmaku_timer.wait_time = delay / danmaku_delay_mod
 	bullet_damage = damage
 	danmaku_timer.start()
 	pass
@@ -215,4 +226,26 @@ func add_shield():
 	var shield = shield_class.instance()
 	shield.angle = rand_range(0,360)
 	print("added ",shield.get_name())
-	add_child(shield)
+	powerup_container.add_child(shield)
+	
+func add_powerup():
+	#add damage power up
+	var powerup = DamageUp.instance()
+	powerup_names.append(powerup.get_name())
+	powerup_container.add_child(powerup)
+	refresh_powerups()
+	pass
+	
+func lose_powerup():
+	if powerup_container.get_children().size() <= 0:
+		return
+	var n = powerup_container.get_children().pop_back()
+	n.queue_free()
+	powerup_names.pop_back()
+	refresh_powerups()
+	
+func refresh_powerups():
+	bullet_damage_bonus = powerup_names.count("DamageUp")
+	print(bullet_damage_bonus)
+	pass
+	
