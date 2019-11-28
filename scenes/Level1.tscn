@@ -25,7 +25,7 @@
 [ext_resource path="res://assets/music/m/new-distorton-Bit-Bit-Loop.ogg" type="AudioStream" id=23]
 [ext_resource path="res://sauce/Music/DefaultMusicStopped.gd" type="Script" id=24]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.97334, 12.031 )
 
 [sub_resource type="SpriteFrames" id=2]
@@ -36,7 +36,7 @@ animations = [ {
 "speed": 60.0
 } ]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 30
 font_data = ExtResource( 20 )
 
@@ -182,11 +182,10 @@ position = Vector2( 300, 600 )
 script = ExtResource( 6 )
 
 [node name="playerCollision" type="CollisionShape2D" parent="World/player"]
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="World/player"]
 frames = SubResource( 2 )
-frame = 1
 playing = true
 
 [node name="danmaku_timer" type="Timer" parent="World/player"]
@@ -252,7 +251,7 @@ margin_bottom = 40.0
 margin_left = 270.0
 margin_right = 40.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "100"
 
 [node name="Timer" type="Timer" parent="Countdown"]
