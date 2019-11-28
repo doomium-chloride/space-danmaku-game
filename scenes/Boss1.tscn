@@ -1,31 +1,41 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://assets/background/stars_far.png" type="Texture" id=1]
 [ext_resource path="res://sauce/stars_far.gd" type="Script" id=2]
 [ext_resource path="res://assets/background/stars_close.png" type="Texture" id=3]
 [ext_resource path="res://sauce/Enemies/EnemySpawner.gd" type="Script" id=4]
 [ext_resource path="res://sauce/player.gd" type="Script" id=5]
-[ext_resource path="res://assets/sprite/Th14SakuyaBackSprite.png" type="Texture" id=6]
-[ext_resource path="res://assets/soundFX/Za Warudo.ogg" type="AudioStream" id=7]
-[ext_resource path="res://sauce/HUD.gd" type="Script" id=8]
-[ext_resource path="res://assets/HUD/timebar_background.png" type="Texture" id=9]
-[ext_resource path="res://assets/HUD/timebar_border.png" type="Texture" id=10]
-[ext_resource path="res://assets/HUD/timebar_filling.png" type="Texture" id=11]
-[ext_resource path="res://assets/HUD/hp_border.png" type="Texture" id=12]
-[ext_resource path="res://assets/HUD/hp_filling.png" type="Texture" id=13]
-[ext_resource path="res://assets/background/shatter.png" type="Texture" id=14]
-[ext_resource path="res://sauce/Shatter.gd" type="Script" id=15]
-[ext_resource path="res://sauce/Bosses/Boss1.gd" type="Script" id=16]
-[ext_resource path="res://assets/sprite/enemy/boss1.png" type="Texture" id=17]
-[ext_resource path="res://sauce/dynamic_font_data.tres" type="DynamicFontData" id=18]
-[ext_resource path="res://assets/music/m/new Bit Bit Loop.ogg" type="AudioStream" id=19]
-[ext_resource path="res://sauce/Music/DefaultMusic.gd" type="Script" id=20]
-[ext_resource path="res://assets/music/m/new-distorton-Bit-Bit-Loop.ogg" type="AudioStream" id=21]
-[ext_resource path="res://sauce/Music/DefaultMusicStopped.gd" type="Script" id=22]
-[ext_resource path="res://sauce/PowerUp/PowerUpSpawner.gd" type="Script" id=23]
+[ext_resource path="res://assets/sprite/player/yousei.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprite/player/yousei-1.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprite/player/yousei-2.png" type="Texture" id=8]
+[ext_resource path="res://assets/soundFX/shatter.ogg" type="AudioStream" id=9]
+[ext_resource path="res://sauce/HUD.gd" type="Script" id=10]
+[ext_resource path="res://assets/HUD/timebar_background.png" type="Texture" id=11]
+[ext_resource path="res://assets/HUD/timebar_border.png" type="Texture" id=12]
+[ext_resource path="res://assets/HUD/timebar_filling.png" type="Texture" id=13]
+[ext_resource path="res://assets/HUD/hp_border.png" type="Texture" id=14]
+[ext_resource path="res://assets/HUD/hp_filling.png" type="Texture" id=15]
+[ext_resource path="res://assets/background/shatter.png" type="Texture" id=16]
+[ext_resource path="res://sauce/Shatter.gd" type="Script" id=17]
+[ext_resource path="res://sauce/PowerUp/PowerUpSpawner.gd" type="Script" id=18]
+[ext_resource path="res://sauce/Bosses/Boss1.gd" type="Script" id=19]
+[ext_resource path="res://assets/sprite/enemy/boss1.png" type="Texture" id=20]
+[ext_resource path="res://sauce/dynamic_font_data.tres" type="DynamicFontData" id=21]
+[ext_resource path="res://assets/music/m/new Bit Bit Loop.ogg" type="AudioStream" id=22]
+[ext_resource path="res://sauce/Music/DefaultMusic.gd" type="Script" id=23]
+[ext_resource path="res://assets/music/m/new-distorton-Bit-Bit-Loop.ogg" type="AudioStream" id=24]
+[ext_resource path="res://sauce/Music/DefaultMusicStopped.gd" type="Script" id=25]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8.75018, 22.8016 )
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 3.97334, 12.031 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 60.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 14.9111, 9.08996 )
@@ -33,11 +43,12 @@ extents = Vector2( 14.9111, 9.08996 )
 [sub_resource type="DynamicFont" id=3]
 size = 30
 outline_color = Color( 1, 0, 0, 1 )
-font_data = ExtResource( 18 )
+font_data = ExtResource( 21 )
 
 [node name="Boss1" type="Node2D"]
 
 [node name="World" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="stars" type="Node2D" parent="World"]
 
@@ -171,34 +182,34 @@ script = ExtResource( 4 )
 [node name="Timer" type="Timer" parent="World/EnemySpawner"]
 
 [node name="player" type="KinematicBody2D" parent="World"]
-editor/display_folded = true
 position = Vector2( 300, 600 )
 script = ExtResource( 5 )
 
 [node name="playerCollision" type="CollisionShape2D" parent="World/player"]
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="World/player"]
-texture = ExtResource( 6 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="World/player"]
+frames = SubResource( 5 )
+frame = 2
+playing = true
 
 [node name="danmaku_timer" type="Timer" parent="World/player"]
 autostart = true
 
 [node name="timestop_timer" type="Timer" parent="World/player"]
-wait_time = 5.0
-one_shot = true
+wait_time = 0.01
 
 [node name="invincibility_timer" type="Timer" parent="World/player"]
 wait_time = 0.5
 one_shot = true
 
 [node name="TimestopFX" type="AudioStreamPlayer" parent="World/player"]
-stream = ExtResource( 7 )
+stream = ExtResource( 9 )
 
 [node name="HUD" type="Control" parent="World"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 8 )
+script = ExtResource( 10 )
 
 [node name="TimestopBar" type="TextureProgress" parent="World/HUD"]
 margin_left = 10.0
@@ -208,10 +219,10 @@ margin_bottom = 70.0
 rect_scale = Vector2( 0.5, 0.5 )
 max_value = 5.0
 step = 0.01
-texture_under = ExtResource( 9 )
-texture_over = ExtResource( 10 )
-texture_progress = ExtResource( 11 )
-fill_mode = 5
+texture_under = ExtResource( 11 )
+texture_over = ExtResource( 12 )
+texture_progress = ExtResource( 13 )
+fill_mode = 4
 
 [node name="HealthBar" type="TextureProgress" parent="World/HUD"]
 margin_left = 390.0
@@ -220,30 +231,39 @@ margin_right = 790.0
 margin_bottom = 70.0
 rect_scale = Vector2( 0.5, 0.3 )
 value = 100.0
-texture_over = ExtResource( 12 )
-texture_progress = ExtResource( 13 )
+texture_over = ExtResource( 14 )
+texture_progress = ExtResource( 15 )
 fill_mode = 1
 
 [node name="Shatter" type="Sprite" parent="World"]
-texture = ExtResource( 14 )
+texture = ExtResource( 16 )
 offset = Vector2( 300, 350 )
-script = ExtResource( 15 )
+script = ExtResource( 17 )
+
+[node name="PowerUpSpawner" type="Node" parent="World"]
+script = ExtResource( 18 )
+
+[node name="Container" type="Node" parent="World/PowerUpSpawner"]
+
+[node name="Timer" type="Timer" parent="World/PowerUpSpawner"]
 
 [node name="Boss" type="KinematicBody2D" parent="."]
+editor/display_folded = true
 position = Vector2( 300, 60 )
-script = ExtResource( 16 )
+script = ExtResource( 19 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boss"]
 shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Boss"]
-texture = ExtResource( 17 )
+texture = ExtResource( 20 )
 
 [node name="Timer" type="Timer" parent="Boss"]
 
 [node name="MoveTimer" type="Timer" parent="Boss"]
 
 [node name="Control" type="Control" parent="."]
+editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -257,17 +277,18 @@ custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "500"
 
 [node name="DefaultMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 19 )
+stream = ExtResource( 22 )
 autoplay = true
-script = ExtResource( 20 )
+script = ExtResource( 23 )
 
 [node name="DefaultMusicStopped" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 21 )
+stream = ExtResource( 24 )
 autoplay = true
-script = ExtResource( 22 )
+script = ExtResource( 25 )
 
 [node name="PowerUpSpawner" type="Node" parent="."]
-script = ExtResource( 23 )
+editor/display_folded = true
+script = ExtResource( 18 )
 
 [node name="Container" type="Node" parent="PowerUpSpawner"]
 
