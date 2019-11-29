@@ -35,6 +35,8 @@ const of_player = true
 
 const max_hp = 100
 var hp = max_hp
+var regen_rate = 0
+onready var regen_timer = Timer.new()
 
 var shoot_style = "flat"
 
@@ -61,6 +63,9 @@ func _ready():
 	
 	if not global.is_connected("style_change",self,"change_style"):
 		global.connect("style_change",self,"change_style")
+		
+	if not global.is_connected("power_up",self,"add_powerup"):
+		global.connect("power_up",self,"add_powerup")
 	
 	invincible = get_node("invincibility_timer")
 	invincible.wait_time = invincible_time
@@ -69,6 +74,11 @@ func _ready():
 	
 	powerup_container = Node2D.new()
 	add_child(powerup_container)
+	
+	add_child(regen_timer)
+	regen_timer.wait_time = 5
+	regen_timer.connect("timeout",self,"regen")
+	regen_timer.start()
 	
 	change_style("narrow",0.1)
 	
@@ -175,9 +185,6 @@ func _process(delta):
 	if Input.is_action_just_pressed("NarrowStyle"):
 		change_style("narrow",0.1)
 		
-	# testing code
-	if Input.is_action_just_pressed("test"):
-		add_powerup()
 
 	
 func _on_player_hit(damage):
@@ -192,6 +199,7 @@ func damage_player(damage):
 #		invincible.start()
 	hp -= damage
 	global.emit_signal("player_hp",hp)
+
 	
 func timestop_add(number):
 	timestop_recharge += number
@@ -228,11 +236,11 @@ func add_shield():
 	print("added ",shield.get_name())
 	powerup_container.add_child(shield)
 	
-func add_powerup():
+func add_powerup(powerup):
 	#add damage power up
-	var powerup = DamageUp.instance()
-	powerup_names.append(powerup.get_name())
-	powerup_container.add_child(powerup)
+	var buff = powerup.instance()
+	powerup_names.append(buff.get_name())
+	powerup_container.add_child(buff)
 	refresh_powerups()
 	pass
 	
@@ -246,6 +254,9 @@ func lose_powerup():
 	
 func refresh_powerups():
 	bullet_damage_bonus = powerup_names.count("DamageUp")
-	print(bullet_damage_bonus)
+	regen_rate = powerup_names.count("RegenUp")
 	pass
-	
+
+func regen():
+	heal(regen_rate)
+

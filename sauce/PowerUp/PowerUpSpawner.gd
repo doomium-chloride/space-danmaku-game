@@ -5,14 +5,16 @@ extends Node
 # var b = "text"
 onready var global = get_node("/root/global")
 const health = preload("res://sauce/PowerUp/Health.tscn")
-const spread = preload("res://sauce/PowerUp/SpreadStyle.tscn")
-const normal = preload("res://sauce/PowerUp/NormalStyle.tscn")
-const narrow = preload("res://sauce/PowerUp/NarrowStyle.tscn")
+#const spread = preload("res://sauce/PowerUp/SpreadStyle.tscn")
+#const normal = preload("res://sauce/PowerUp/NormalStyle.tscn")
+#const narrow = preload("res://sauce/PowerUp/NarrowStyle.tscn")
+const damage = preload("res://sauce/PowerUp/PowerUpDamage.tscn")
+const regen = preload("res://sauce/PowerUp/PowerUpRegen.tscn")
 
 export var spawn_delay = 3.0
 export var spawn = true
 
-var list = [health]
+var list = [health, damage, regen]
 
 var container = null
 var spawn_now = false

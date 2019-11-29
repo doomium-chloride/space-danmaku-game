@@ -28,6 +28,7 @@ signal timestop
 
 signal health_pack(value)
 signal style_change(style,delay,damage)
+signal power_up(powerup)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
