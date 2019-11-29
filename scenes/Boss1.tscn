@@ -21,15 +21,15 @@
 [ext_resource path="res://sauce/Bosses/Boss1.gd" type="Script" id=19]
 [ext_resource path="res://assets/sprite/enemy/boss1.png" type="Texture" id=20]
 [ext_resource path="res://sauce/dynamic_font_data.tres" type="DynamicFontData" id=21]
-[ext_resource path="res://assets/music/m/new Bit Bit Loop.ogg" type="AudioStream" id=22]
+[ext_resource path="res://assets/music/Goodnightmare.ogg" type="AudioStream" id=22]
 [ext_resource path="res://sauce/Music/DefaultMusic.gd" type="Script" id=23]
-[ext_resource path="res://assets/music/m/new-distorton-Bit-Bit-Loop.ogg" type="AudioStream" id=24]
+[ext_resource path="res://assets/music/Goodnightmare-reverb.ogg" type="AudioStream" id=24]
 [ext_resource path="res://sauce/Music/DefaultMusicStopped.gd" type="Script" id=25]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.97334, 12.031 )
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 7 ) ],
 "loop": true,
@@ -37,10 +37,10 @@ animations = [ {
 "speed": 60.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 14.9111, 9.08996 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 30
 outline_color = Color( 1, 0, 0, 1 )
 font_data = ExtResource( 21 )
@@ -186,11 +186,11 @@ position = Vector2( 300, 600 )
 script = ExtResource( 5 )
 
 [node name="playerCollision" type="CollisionShape2D" parent="World/player"]
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="World/player"]
-frames = SubResource( 5 )
-frame = 2
+frames = SubResource( 2 )
+frame = 1
 playing = true
 
 [node name="danmaku_timer" type="Timer" parent="World/player"]
@@ -253,7 +253,7 @@ position = Vector2( 300, 60 )
 script = ExtResource( 19 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boss"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Boss"]
 texture = ExtResource( 20 )
@@ -272,7 +272,7 @@ margin_left = 270.0
 margin_top = 10.0
 margin_right = 40.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "500"
 

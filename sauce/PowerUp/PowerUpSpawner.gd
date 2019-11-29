@@ -10,11 +10,12 @@ const health = preload("res://sauce/PowerUp/Health.tscn")
 #const narrow = preload("res://sauce/PowerUp/NarrowStyle.tscn")
 const damage = preload("res://sauce/PowerUp/PowerUpDamage.tscn")
 const regen = preload("res://sauce/PowerUp/PowerUpRegen.tscn")
+const time_regen = preload("res://sauce/PowerUp/PowerUpTimeRegen.tscn")
 
 export var spawn_delay = 3.0
 export var spawn = true
 
-var list = [health, damage, regen]
+var list = [health, damage, regen, time_regen]
 
 var container = null
 var spawn_now = false
@@ -26,7 +27,8 @@ func _ready():
 	container = get_node("Container")
 	start_spawning()
 	set_process(true)
-	pass # Replace with function body.
+	
+	
 
 func start_spawning():
 	timer = get_node("Timer") 
@@ -41,7 +43,11 @@ func _process(delta):
 	if global.time_stopped:
 		return
 	spawn()
-	pass
+	
+	# begin testing code
+	if Input.is_action_just_pressed("test"):
+		spawn_choice()
+	# end testing code
 
 func spawn_ok():
 	spawn_now = true
@@ -50,7 +56,10 @@ func spawn():
 	if spawn_now:
 		spawn_choice()
 		spawn_now = false
-func spawn_choice():
+func spawn_choice(choice = null):
+	if choice != null:
+		spawn_powerup(list[choice])
+		return
 	if randi() % 2 < 1:
 		return
 	var sample = randi() % list.size()

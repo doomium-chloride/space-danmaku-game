@@ -9,6 +9,7 @@ var current_scene = null
 
 export var hp = 100
 export var time = 5
+export var powerups = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

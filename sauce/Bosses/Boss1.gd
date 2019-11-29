@@ -38,6 +38,8 @@ func _ready():
 	player.timestop_recharge = global.time
 	player.damage_player(0)
 	
+	player.load_powerups(global.powerups)
+	
 	hp = max_hp
 	bullet_speed = 300
 	shoot_delay = 0.5

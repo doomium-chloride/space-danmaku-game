@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://sauce/Menu/Start.gd" type="Script" id=1]
 [ext_resource path="res://assets/font/font_big.tres" type="DynamicFont" id=2]
 [ext_resource path="res://sauce/Menu/Tutorial.gd" type="Script" id=3]
-[ext_resource path="res://assets/music/m/new Bit Bit Loop.ogg" type="AudioStream" id=4]
-[ext_resource path="res://sauce/Music/DefaultMusic.gd" type="Script" id=5]
+[ext_resource path="res://scenes/Credits.gd" type="Script" id=4]
+[ext_resource path="res://assets/music/m/new Bit Bit Loop.ogg" type="AudioStream" id=5]
+[ext_resource path="res://sauce/Music/DefaultMusic.gd" type="Script" id=6]
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
@@ -55,6 +56,7 @@ margin_top = 208.0
 margin_right = 500.0
 margin_bottom = 308.0
 rect_min_size = Vector2( 500, 100 )
+script = ExtResource( 4 )
 
 [node name="Label" type="Label" parent="Menu/Centre/Buttons/Credits"]
 margin_right = 350.0
@@ -63,8 +65,9 @@ custom_fonts/font = ExtResource( 2 )
 text = "Credits"
 
 [node name="DefaultMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
+stream = ExtResource( 5 )
 autoplay = true
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 [connection signal="pressed" from="Menu/Centre/Buttons/Start" to="Menu/Centre/Buttons/Start" method="_on_Start_pressed"]
 [connection signal="pressed" from="Menu/Centre/Buttons/Tutorial" to="Menu/Centre/Buttons/Tutorial" method="_on_Tutorial_pressed"]
+[connection signal="pressed" from="Menu/Centre/Buttons/Credits" to="Menu/Centre/Buttons/Credits" method="_on_Credits_pressed"]

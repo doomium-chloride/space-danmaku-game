@@ -2,7 +2,11 @@ extends KinematicBody2D
 
 const bullet_class = preload("res://sauce/PlayerBullet.tscn")
 const shield_class = preload("res://sauce/PowerUp/Shield.tscn")
+
 const DamageUp = preload("res://sauce/PowerUp/DamageUp.tscn")
+const RegenUp = preload("res://sauce/PowerUp/RegenUp.tscn")
+const TimeRegenUp = preload("res://sauce/PowerUp/TimeRegenUp.tscn")
+
 onready var global = get_node("/root/global")
 # Declare member variables here. Examples:
 # var a = 2
@@ -37,6 +41,9 @@ const max_hp = 100
 var hp = max_hp
 var regen_rate = 0
 onready var regen_timer = Timer.new()
+
+const base_time_regen = 0.5
+var time_regen_mod = 1
 
 var shoot_style = "flat"
 
@@ -118,7 +125,7 @@ func _physics_process(delta):
 			collision.collider.got_hit(1)
 			damage_player(1)
 
-	
+
 func begin_shooting():
 	danmaku_timer = get_node("danmaku_timer")
 	danmaku_timer.wait_time = danmaku_delay
@@ -184,8 +191,8 @@ func _process(delta):
 		change_style("spread",1.1)
 	if Input.is_action_just_pressed("NarrowStyle"):
 		change_style("narrow",0.1)
-		
-
+	
+	
 	
 func _on_player_hit(damage):
 	damage_player(damage)
@@ -215,7 +222,7 @@ func timestop_recharge():
 	if global.time_stopped:
 		timestop_add(-1*timestop_step)
 	else:
-		timestop_add(timestop_step*0.5)
+		timestop_add(timestop_step*base_time_regen*time_regen_mod)
 		
 func end_invincibility():
 	is_invincible = false
@@ -239,6 +246,7 @@ func add_shield():
 func add_powerup(powerup):
 	#add damage power up
 	var buff = powerup.instance()
+	buff.angle = rand_range(0,360)
 	powerup_names.append(buff.get_name())
 	powerup_container.add_child(buff)
 	refresh_powerups()
@@ -255,8 +263,17 @@ func lose_powerup():
 func refresh_powerups():
 	bullet_damage_bonus = powerup_names.count("DamageUp")
 	regen_rate = powerup_names.count("RegenUp")
+	time_regen_mod = 1 + powerup_names.count("TimeRegenUp") / 5.0
 	pass
 
 func regen():
 	heal(regen_rate)
 
+func load_powerups(array):
+	for power_name in array:
+		var power = DamageUp
+		if power_name == "RegenUp":
+			power = RegenUp
+		if power_name == "TimeRegenUp":
+			power = TimeRegenUp
+		add_powerup(power)

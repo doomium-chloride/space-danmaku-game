@@ -26,6 +26,8 @@ func countdown():
 	if current_time <= 0:
 		global.hp = player.hp
 		global.time = player.timestop_recharge
+		global.powerups = player.powerup_names
+		print(global.powerups)
 		global.emit_signal("bullet_clear")
 		global.goto_scene(next_scene)
 		pass
