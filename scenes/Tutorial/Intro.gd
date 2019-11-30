@@ -5,7 +5,7 @@ func _ready():
 	text_array = ["The distant future",
 	"The year is 2020",
 	"Within the distant reaches of space",
-	"Planet Siog, the faire homewolrd is under assult by the Sapius empire.",
+	"Planet Siog, the faire homeworld is under assult by the Sapius empire.",
 	"...",
 	"The cruel Sapesians seek the faires wings which when ground becomes a powerful narcotic. " +\
 	"Though the faires fought valliantly they were no match to the Sapesians superior technology.",
