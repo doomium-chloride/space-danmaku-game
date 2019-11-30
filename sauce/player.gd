@@ -176,8 +176,6 @@ func _process(delta):
 		refresh_powerups()
 		if global.time_stopped:
 			timestopFX.play()
-	if hp > max_hp:
-		hp = max_hp
 	if hp < 0:
 		print("player death")
 		global.emit_signal("bullet_clear")
@@ -205,6 +203,8 @@ func damage_player(damage):
 #		is_invincible = true
 #		invincible.start()
 	hp -= damage
+	if hp > max_hp:
+		hp = max_hp
 	global.emit_signal("player_hp",hp)
 
 	

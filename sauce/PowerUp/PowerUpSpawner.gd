@@ -45,8 +45,8 @@ func _process(delta):
 	spawn()
 	
 	# begin testing code
-	if Input.is_action_just_pressed("test"):
-		spawn_choice()
+#	if Input.is_action_just_pressed("test"):
+#		spawn_choice()
 	# end testing code
 
 func spawn_ok():

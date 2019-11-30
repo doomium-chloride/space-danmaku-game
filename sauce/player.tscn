@@ -25,6 +25,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
+frame = 2
 playing = true
 
 [node name="danmaku_timer" type="Timer" parent="."]
