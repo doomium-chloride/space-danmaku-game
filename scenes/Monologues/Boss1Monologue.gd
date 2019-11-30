@@ -8,4 +8,4 @@ func _ready():
 	"But it's still a faire, which means its wings " +\
 	"need to be grounded up first",
 	"*Prepare for combat*"]
-	pass
+	init()

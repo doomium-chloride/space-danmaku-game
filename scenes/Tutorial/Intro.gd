@@ -18,4 +18,4 @@ func _ready():
 	"-Ye \n-Old \n-Ultra \n-Super \n-Eccentric \n-Idealiser",
 	"...",
 	"In the upper atmostphere of siog the battle rages on..."]
-	pass
+	init()

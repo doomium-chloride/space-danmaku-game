@@ -16,7 +16,7 @@ export var next_scene = "res://scenes/TitleScreen.tscn"
 func _ready():
 	connect("next",self,"next_text")
 	connect("skip",self,"skip_monologue")
-	textbox.text = text_array[current]
+	init()
 	set_process(true)
 	pass
 
@@ -35,4 +35,6 @@ func next_text():
 		
 func skip_monologue():
 	global.goto_scene(next_scene)
-	
+
+func init():
+	textbox.text = text_array[current]

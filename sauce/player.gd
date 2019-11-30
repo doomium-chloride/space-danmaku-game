@@ -11,7 +11,7 @@ onready var global = get_node("/root/global")
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text
-var on_death = "res://scenes/TitleScreen.tscn"
+var on_death = "res://scenes/Tutorial/PlayerDeath.tscn"
 
 var timestop_timer = null
 var timestop_recharge = 5.0

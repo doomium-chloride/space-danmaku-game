@@ -6,6 +6,8 @@ onready var label = get_parent().get_node("Control/Label")
 
 export var max_hp = 1000
 
+var next_scene = "res://scenes/Tutorial/Credits.tscn"
+
 func random_direction():
 	var x_length = get_viewport_rect().size.x
 	var y_length = get_viewport_rect().size.y
@@ -70,4 +72,4 @@ func got_hit(damage):
 	
 func die():
 	global.emit_signal("bullet_clear")
-	global.goto_scene("res://scenes/TitleScreen.tscn")
+	global.goto_scene(next_scene)

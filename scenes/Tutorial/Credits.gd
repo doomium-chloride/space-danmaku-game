@@ -5,15 +5,17 @@ var title_array = [""]
 
 func _ready():
 	connect("next",self,"next_title")
-	title_array = ["Art", "Music", "Sound FX", "play testers", "me", "Special Thanks"]
+	title_array = ["Art", "Music", "Sound FX", "Play testers", "Story", "me", "Special Thanks"]
 	
 	text_array = ["Gimp + hiclipart (public domain)", 
 	"Kevin MacLeod.\n" +\
-	"Some by me and Matthew Whitta",
+	"Some edited by me and Matthew Whitta",
 	"esmayorga \n https://freesound.org/people \n /esmayorga/sounds/356312/",
-	"Ciel and Matthew Whitta",
+	"Ciel and Matthew Whitta", "Matthew Whitta",
 	"Doomium Chloride \n Jonathan Sulinom",
-	"You \n" + "Thank you for playing"]
+	"You \n Thank you for playing"]
+	init()
+	topic.text = title_array[current]
 
 
 func next_title():

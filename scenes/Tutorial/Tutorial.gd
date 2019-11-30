@@ -20,4 +20,4 @@ func _ready():
 	"The top right bar is the health bar. When the health bar " +\
 	"depeletes, your character is defeated.",
 	"That's all for now. Happy 弾幕❕❕！"]
-	pass
+	init()
