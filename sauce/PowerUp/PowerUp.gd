@@ -18,5 +18,5 @@ func _process(delta):
 	if not global.time_stopped:
 		translate(velocity * delta)
 	if not get_node("notifier").is_on_screen():
-        queue_free()
+		queue_free()
 	pass

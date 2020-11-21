@@ -16,6 +16,9 @@ margin_left = 40.0
 margin_top = 40.0
 margin_right = 560.0
 margin_bottom = 660.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Centre" type="HBoxContainer" parent="Menu"]
 margin_right = 520.0
@@ -37,6 +40,9 @@ margin_right = 224.0
 margin_bottom = 140.0
 custom_fonts/font = ExtResource( 2 )
 text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tutorial" type="Button" parent="Menu/Centre/Buttons"]
 margin_top = 104.0
@@ -50,6 +56,9 @@ margin_right = 550.0
 margin_bottom = 140.0
 custom_fonts/font = ExtResource( 2 )
 text = "Tutorial"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Credits" type="Button" parent="Menu/Centre/Buttons"]
 margin_top = 208.0

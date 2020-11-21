@@ -22,7 +22,7 @@ func _process(delta):
 	if of_player or not get_node("/root/global").time_stopped:
 		translate(velocity * delta)
 	if not get_node("notifier").is_on_screen():
-        queue_free()
+		queue_free()
 	pass
 
 func _on_bullet_body_shape_entered(body_id, body, body_shape, area_shape):
